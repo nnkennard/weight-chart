@@ -57,6 +57,8 @@ function updateMain(enteredValue , enteredFormat){
     CURRENT_INGREDIENT["volume"]
   );
   document.getElementById("volumeUnit").innerHTML = CURRENT_INGREDIENT["unit"];
+
+  updateScaled();
   
 }
 
