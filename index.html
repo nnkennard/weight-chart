@@ -1,0 +1,112 @@
+<html>
+   <head>
+   	
+
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link rel="stylesheet" href="styles/index.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <script src="scripts/index.js"></script>
+   </head>
+   <body onload="build();" class="blue">
+      <div class="container">
+         <h1>Ingredient Weight Converter</h1>
+         <br>
+         <div class="row">
+            <div class="col-lg-4">
+               <div class="card">
+                  <div class="card-header">
+                     Ingredient selector
+                  </div>
+                  <div class="card-body">
+                     <input id="ingredientName" name="textinput" type="text" value="Start typing an ingredient..." class="form-control input-lg" onchange="alert(0)">
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-4">
+               <div class="card">
+                  <div class="card-header">
+                     Enter amount
+                  </div>
+                  <div class="card-body">
+                     <div class="row">
+                        <label class="col-md-4 control-label" for="textinput">Ingredient</label>
+                        <div class="col-md-8">
+                           <select class="custom-select" id="ingredientSelect" onchange="changeIngredient();" onfocus="this.selectedIndex = -1;">
+                           </select>
+                           <br />
+                        </div>
+                     </div>
+                     <br />
+                     <div class="row">
+                        <label class="col-md-6 control-label" for="textinput">Volume in <span id="volumeUnit"></span></label>
+                        <div class="col-md-6">
+                           <input id="volumeAmount" name="textinput" type="text" value="0" class="form-control input-md" onchange="updateAmounts(this.value, 0)">
+                        </div>
+                     </div>
+                     <br />
+                     <div class="row">
+                        <label class="col-md-6 control-label" for="textinput">Weight in g</label>
+                        <div class="col-md-6">
+                           <input id="gAmount" name="gAmount" type="text" value="0" class="form-control input-md" onchange="updateAmounts(this.value, 1)">
+                        </div>
+                     </div>
+                     <br />
+                     <div class="row">
+                        <label class="col-md-6 control-label" for="textinput">Weight in oz</label>
+                        <div class="col-md-6">
+                           <input id="ozAmount" name="ozAmount" type="text" value="0" class="form-control input-md" onchange="updateAmounts(this.value, 2)">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-4">
+               <div class="card">
+                  <div class="card-header">
+                     Scale recipe up or down
+                  </div>
+                  <div class="card-body">
+                     <div class="row">
+                        <div class="col-md-8">
+                           <select class="custom-select my-1 mr-sm-2" id="mulDivSelector" onchange="updateScaled();" onfocus="this.selectedIndex = -1;">
+                              <option value="mul">Multiply recipe by</option>
+                              <option value="div">Divide recipe by</option>
+                           </select>
+                        </div>
+                        <div class="col-md-3">
+                           <input id="mulDivAmount" name="mulDivAmount" type="text" value="1" size="1" class="form-control input-sm" onchange="updateScaled();">
+                        </div>
+                     </div>
+                     <br />
+                     <div class="row">
+                        <label class="col-md-6 control-label" for="textinput">Volume in <span id="mulDiv_volumeUnit"></span></label>
+                        <div class="col-md-6">
+                           <span id="mulDiv_volumeAmount" name="mulDiv_volumeAmount"> </span> 
+                        </div>
+                     </div>
+                     <br />
+                     <div class="row">
+                        <label class="col-md-6 control-label" for="textinput">Weight in g</label>
+                        <div class="col-md-6">
+                           <span id="mulDiv_gAmount" name="mulDiv_gAmount"> </span> 
+                        </div>
+                     </div>
+                     <br />
+                     <div class="row">
+                        <label class="col-md-6 control-label" for="textinput">Weight in oz</label>
+                        <div class="col-md-6">
+                           <span id="mulDiv_ozAmount" name="mulDiv_ozAmount"> </span> 
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      <br />
+      </div>
+      </div>
+   </body>
+</html>
