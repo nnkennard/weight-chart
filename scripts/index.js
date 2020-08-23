@@ -14,38 +14,52 @@ function doSearch(){
   tableBody = document.getElementById("searchTable");
   tableBody.innerHTML = "";
   for (result of results){
-    console.log(result);
-    tableBody.innerHTML += ```<tr> <td><a onClick="selectIngredient(""); return false;" href="fallback.html">" + result["item"]["ingredient"] + " </a></td></tr>```
+    index = result["item"]["idx"];
+    name = result["item"]['ingredient'];
+    input = '<tr> <td><a onClick="selectIngredient(' + index +'); return false;"> '+ name +' </a></td></tr>';
+    tableBody.innerHTML += input;
   }
 
 }
 
-function selectIngredient(ingredient) {
-  document.getElementById("selectedIngredient").innerHTML = ingredient
-}
-
-function build() {
-  selectElement = document.getElementById("ingredientSelect");
-  for (var idx = 0; idx < INGREDIENTS.length; idx++) {
-    selectElement.innerHTML +=
-      "<option value=" +
-      idx +
-      ">" +
-      INGREDIENTS[idx]["ingredient"] +
-      "</option>";
-  }
-  changeIngredient();
-}
-
-function changeIngredient() {
-  ing = INGREDIENTS[document.getElementById("ingredientSelect").value];
-  document.getElementById("volumeUnit").innerHTML = ing["unit"];
-  document.getElementById("mulDiv_volumeUnit").innerHTML = ing["unit"];
-  document.getElementById("volumeAmount").value = ing["volume"];
-  document.getElementById("gAmount").value = ing["gm"];
-  document.getElementById("ozAmount").value = ing["oz"];
+function selectIngredient(index) {
+  CURRENT_INGREDIENT = INGREDIENTS[index];
+  document.getElementById("selectedIngredient").innerHTML = CURRENT_INGREDIENT["ingredient"];
+  document.getElementById("volumeUnit").innerHTML = CURRENT_INGREDIENT["unit"];
+  document.getElementById("volumeAmount").value = CURRENT_INGREDIENT["volume"];
+  document.getElementById("gAmount").value = CURRENT_INGREDIENT["gm"];
+  document.getElementById("ozAmount").value = CURRENT_INGREDIENT["oz"];
   updateScaled();
 }
+
+FORMATS = ["volume", "gm", "oz"];
+
+CURRENT_INGREDIENT = null;
+
+
+function updateMain(enteredValue , enteredFormat){
+
+  baseType = FORMATS[enteredFormat];
+
+  document.getElementById("gAmount").value = scale(
+    enteredValue,
+    CURRENT_INGREDIENT[baseType],
+    CURRENT_INGREDIENT["gm"]
+  );
+  document.getElementById("ozAmount").value = scale(
+    enteredValue,
+    CURRENT_INGREDIENT[baseType],
+    CURRENT_INGREDIENT["oz"]
+  );
+  document.getElementById("volumeAmount").value = scale(
+    enteredValue,
+    CURRENT_INGREDIENT[baseType],
+    CURRENT_INGREDIENT["volume"]
+  );
+  document.getElementById("volumeUnit").innerHTML = CURRENT_INGREDIENT["unit"];
+  
+}
+
 
 function updateScaled() {
   mulDivSelector = document.getElementById("mulDivSelector").value;
@@ -65,29 +79,3 @@ function updateScaled() {
 function scale(current_amount, base_amount_old_format, base_amount_new_format) {
   return (current_amount * base_amount_new_format) / base_amount_old_format;
 }
-
-FORMATS = ["volume", "gm", "oz"];
-
-function updateAmounts(baseAmount, typeIndex) {
-  baseType = FORMATS[typeIndex];
-  ing = INGREDIENTS[document.getElementById("ingredientSelect").value];
-
-  document.getElementById("gAmount").value = scale(
-    baseAmount,
-    ing[baseType],
-    ing["gm"]
-  );
-  document.getElementById("ozAmount").value = scale(
-    baseAmount,
-    ing[baseType],
-    ing["oz"]
-  );
-  document.getElementById("volumeAmount").value = scale(
-    baseAmount,
-    ing[baseType],
-    ing["volume"]
-  );
-  document.getElementById("volumeUnit").innerHTML = ing["unit"];
-  updateScaled();
-}
-

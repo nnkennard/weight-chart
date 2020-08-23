@@ -10,7 +10,7 @@
       <script src="ingredients.js" ></script>
       <script src="scripts/index.js"></script>
    </head>
-   <body onload="build();" class="blue">
+   <body class="blue">
       <div class="container">
          <h1>Ingredient Weight Converter</h1>
          <br>
@@ -54,21 +54,21 @@
                      <div class="row">
                         <label class="col-md-6 control-label" for="textinput">Volume in <span id="volumeUnit"></span></label>
                         <div class="col-md-6">
-                           <input id="volumeAmount" name="textinput" type="text" value="0" class="form-control input-md" onchange="updateAmounts(this.value, 0)">
+                           <input id="volumeAmount" name="textinput" type="text" value="0" class="form-control input-md" onchange="updateMain(this.value, 0)">
                         </div>
                      </div>
                      <br />
                      <div class="row">
                         <label class="col-md-6 control-label" for="textinput">Weight in g</label>
                         <div class="col-md-6">
-                           <input id="gAmount" name="gAmount" type="text" value="0" class="form-control input-md" onchange="updateAmounts(this.value, 1)">
+                           <input id="gAmount" name="gAmount" type="text" value="0" class="form-control input-md" onchange="updateMain(this.value, 1)">
                         </div>
                      </div>
                      <br />
                      <div class="row">
                         <label class="col-md-6 control-label" for="textinput">Weight in oz</label>
                         <div class="col-md-6">
-                           <input id="ozAmount" name="ozAmount" type="text" value="0" class="form-control input-md" onchange="updateAmounts(this.value, 2)">
+                           <input id="ozAmount" name="ozAmount" type="text" value="0" class="form-control input-md" onchange="updateMain(this.value, 2)">
                         </div>
                      </div>
                   </div>
