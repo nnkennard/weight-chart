@@ -70,6 +70,7 @@ function updateScaled() {
   } else {
     scaleFactor = 1.0 / document.getElementById("mulDivAmount").value;
   }
+  document.getElementById("mulDiv_volumeUnit").innerHTML = document.getElementById("volumeUnit").innerHTML;
   document.getElementById("mulDiv_volumeAmount").innerHTML =
     scaleFactor * document.getElementById("volumeAmount").value;
   document.getElementById("mulDiv_gAmount").innerHTML =
