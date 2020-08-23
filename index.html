@@ -7,6 +7,7 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.1/fuse.min.js"></script>
+      <script src="ingredients.js" ></script>
       <script src="scripts/index.js"></script>
    </head>
    <body onload="build();" class="blue">
@@ -45,8 +46,7 @@
                      <div class="row">
                         <label class="col-md-4 control-label" for="textinput">Ingredient</label>
                         <div class="col-md-8">
-                           <select class="custom-select" id="ingredientSelect" onchange="changeIngredient();" onfocus="this.selectedIndex = -1;">
-                           </select>
+                           <span id="selectedIngredient"> </span>
                            <br />
                         </div>
                      </div>

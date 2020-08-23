@@ -1,19 +1,3 @@
-console.log(Fuse);
-
-INGREDIENTS = [
-  { volume: 0, gm: 0, oz: 0, unit: "", ingredient: "Choose an ingredient..." },
-  { volume: 1, gm: 116, oz: 4, unit: "cup", ingredient: "00' Pizza Flour" },
-  {
-    volume: 1,
-    gm: 120, 
-    oz: 4.25,
-    unit: "cup",
-    ingredient: "All-Purpose Flour"
-  },
-  { volume: 1, gm: 96, oz: 3.375, unit: "cup", ingredient: "Almond Flour" },
-  { volume: 1, gm: 84, oz: 3, unit: "cup", ingredient: "Almond meal" }
-];
-
 const fuse = new Fuse(INGREDIENTS, {
   keys: [
     'ingredient',
@@ -22,7 +6,6 @@ const fuse = new Fuse(INGREDIENTS, {
 
 
 function doSearch(){
-  alert("Hi");
   results = fuse.search(document.getElementById("ingredientName").value);
   if (results.length > 5) {
     alert("Please refine your search term")
@@ -32,11 +15,14 @@ function doSearch(){
   tableBody.innerHTML = "";
   for (result of results){
     console.log(result);
-    tableBody.innerHTML += "<tr> <td>" + result["item"]["ingredient"] + " </td></tr>"
+    tableBody.innerHTML += ```<tr> <td><a onClick="selectIngredient(""); return false;" href="fallback.html">" + result["item"]["ingredient"] + " </a></td></tr>```
   }
 
 }
 
+function selectIngredient(ingredient) {
+  document.getElementById("selectedIngredient").innerHTML = ingredient
+}
 
 function build() {
   selectElement = document.getElementById("ingredientSelect");
