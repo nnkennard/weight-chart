@@ -9,8 +9,9 @@ $(document).ready(function() {
         }
         $('#ingredient_select_' + i).selectize(
                 {
+			placeholder:"Select an ingredient...",
                     onDropdownClose: function(dropdown) {
-                        ingredientChange(dropdown.parent().parent());
+                        ingredientChange(dropdown);
                 }
             }
 
@@ -18,14 +19,43 @@ $(document).ready(function() {
     }
 });
 
-console.log(INGREDIENTS)
+function getIndexFromId(element_id){
+	bits = element_id.split("_")
+	return bits[bits.length - 1]
+}
+
+
+function enableRow(row_index, ingredient){
+	// Enable buttons
+	// Set unit dropdowns
+}
+
 
 function ingredientChange(dropdown) {
-    console.log("bababab")
-    console.log(dropdown)
-    alert("Change in element " + dropdown.firstChild.id);
-    // Enable the other changes
-    // If everything is valid, calculate
+    for (a in INGREDIENTS){
+        console.log(a)
+    }
+    ingredient_select_id = dropdown[0].parentNode.parentNode.childNodes[1].id
+    ingredient = ""
+    for (child of dropdown[0].firstChild.childNodes){
+        if(child.className == 'option selected'){
+            ingredient = child.getAttribute('data-value')
+            console.log(ingredient, ingredient_select_id)
+            index = getIndexFromId(ingredient_select_id)
+
+            if(ingredient == ""){
+                alert("something is wrong, talk to Neha")
+            } else {
+                console.log(ingredient)
+                console.log(INGREDIENTS[ingredient])
+            }
+        }
+    }
+    
+
+    // If ingredient is empty, disable other buttons
+    // If ingredient is not empty, enable other buttons
+    
 }
 
 function amountOrUnitChange(element) {
@@ -33,67 +63,15 @@ function amountOrUnitChange(element) {
 
     // Get details of ingredient
 
-    final_amount = final_unit * recipe_amount / recipe_unit * multiply_amount / divide_amount;
+    final_amount = final_unit_amount * recipe_amount / recipe_unit_amount * multiply_factor / divide_factor;
     // Set final amount
 
 }
 
-
-function selectIngredient(index) {
-    CURRENT_INGREDIENT = INGREDIENTS[index];
-    document.getElementById("selectedIngredient").innerHTML = CURRENT_INGREDIENT["ingredient"];
-    document.getElementById("volumeUnit").innerHTML = CURRENT_INGREDIENT["unit"];
-    document.getElementById("volumeAmount").value = CURRENT_INGREDIENT["volume"];
-    document.getElementById("gAmount").value = CURRENT_INGREDIENT["gm"];
-    document.getElementById("ozAmount").value = CURRENT_INGREDIENT["oz"];
-    updateScaled();
-}
-
-FORMATS = ["volume", "gm", "oz"];
-
-
-function updateMain(enteredValue, enteredFormat) {
-
-    baseType = FORMATS[enteredFormat];
-
-    document.getElementById("gAmount").value = scale(
-        enteredValue,
-        CURRENT_INGREDIENT[baseType],
-        CURRENT_INGREDIENT["gm"]
-    );
-    document.getElementById("ozAmount").value = scale(
-        enteredValue,
-        CURRENT_INGREDIENT[baseType],
-        CURRENT_INGREDIENT["oz"]
-    );
-    document.getElementById("volumeAmount").value = scale(
-        enteredValue,
-        CURRENT_INGREDIENT[baseType],
-        CURRENT_INGREDIENT["volume"]
-    );
-    document.getElementById("volumeUnit").innerHTML = CURRENT_INGREDIENT["unit"];
-
-    updateScaled();
-
+function scaleChange() {
+	// Call amountOrUnitChange on each valid row
 }
 
 
-function updateScaled() {
-    mulDivSelector = document.getElementById("mulDivSelector").value;
-    if (mulDivSelector == "mul") {
-        scaleFactor = document.getElementById("mulDivAmount").value;
-    } else {
-        scaleFactor = 1.0 / document.getElementById("mulDivAmount").value;
-    }
-    document.getElementById("mulDiv_volumeUnit").innerHTML = document.getElementById("volumeUnit").innerHTML;
-    document.getElementById("mulDiv_volumeAmount").innerHTML =
-        scaleFactor * document.getElementById("volumeAmount").value;
-    document.getElementById("mulDiv_gAmount").innerHTML =
-        scaleFactor * document.getElementById("gAmount").value;
-    document.getElementById("mulDiv_ozAmount").innerHTML =
-        scaleFactor * document.getElementById("ozAmount").value;
-}
 
-function scale(current_amount, base_amount_old_format, base_amount_new_format) {
-    return (current_amount * base_amount_new_format) / base_amount_old_format;
-}
+

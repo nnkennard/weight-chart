@@ -3,111 +3,107 @@
 ---
 
 <html>
-    <head>
-        <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
-        <meta content="utf-8" http-equiv="encoding" />
-        <!-- CSS links -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css" />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.css"
-            integrity="sha512-85w5tjZHguXpvARsBrIg9NWdNy5UBK16rAL8VWgnWXK2vMtcRKCBsHWSUbmMu0qHfXW2FVUDiWr6crA+IFdd1A=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        />
-        <!-- JS links -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"
-            integrity="sha512-pF+DNRwavWMukUv/LyzDyDMn8U2uvqYQdJN0Zvilr6DDo/56xPDZdDoyPDYZRSL4aOKO/FGKXTpzDyQJ8je8Qw=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        ></script>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <meta content="utf-8" http-equiv="encoding" />
+    <!-- CSS links -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.css"
+      integrity="sha512-85w5tjZHguXpvARsBrIg9NWdNy5UBK16rAL8VWgnWXK2vMtcRKCBsHWSUbmMu0qHfXW2FVUDiWr6crA+IFdd1A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- JS links -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"
+      integrity="sha512-pF+DNRwavWMukUv/LyzDyDMn8U2uvqYQdJN0Zvilr6DDo/56xPDZdDoyPDYZRSL4aOKO/FGKXTpzDyQJ8je8Qw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
 
-        <script src="ingredients.js"></script>
-        <script src="scripts/index.js"></script>
-    </head>
-    <body class="blue">
-        <section class="hero is-primary" style="background-color: #33475b;">
-            <div class="hero-body">
-                <div class="container">
-                    <p class="title">Weight calculator</p>
-                </div>
+    <script src="ingredients.js"></script>
+    <script src="scripts/index.js"></script>
+  </head>
+  <body class="blue">
+    <section class="hero is-primary" style="background-color: #33475b;">
+      <div class="hero-body">
+        <div class="container">
+          <p class="title">Weight calculator</p>
+        </div>
+      </div>
+    </section>
+    <section>
+      <br />
+      <br />
+      <div class="row">
+        <div class="columns">
+          <div class="column is-4 is-offset-2">
+            <div class="label" for="what-baking">
+              Whatcha baking?
             </div>
-        </section>
-        <section>
-            <br />
-            <br />
-            <div class="row">
-                <div class="columns">
-                    <div class="column is-4 is-offset-2">
-                        <div class="label" for="what-baking">
-                            Whatcha baking?
-                        </div>
-                        <input class="input" id="what-baking" placeholder="" />
-                    </div>
-                    <div class="column is-2">
-                        <div class="label" for="multiply">
-                            Multiply by
-                        </div>
-                        <input class="input" id="multiply" type="number" min="0" placeholder="" />
-                    </div>
-                    <div class="column is-2">
-                        <div class="label" for="multiply">
-                            Divide by
-                        </div>
-                        <input class="input" id="divide" type="number" min="0" placeholder="" />
-                    </div>
-                </div>
+            <input class="input" id="what-baking" placeholder="" />
+          </div>
+          <div class="column is-2">
+            <div class="label" for="multiply">
+              Multiply by
             </div>
-            <div class="columns">
-                <div class="column is-8 is-offset-2 is-centered">
-                    <table class="table is-responsive" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th> Ingredient </th>
-                                <th> Recipe amount </th>
-                                <th> Recipe unit </th>
-                                <th> Final amount </th>
-                                <th> Final unit </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for i in (1..20) %}
-                            <tr>
-                                <td>
-                                    <div class="little-search">
-                                        <select name='example' id="ingredient_select_{{ i }}" placeholder="Select an ingredient..."
-                                         onDropdownClose="ingredientChange(this)">
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>
-                                    <input class="input is-small"
-                                    type="text" id="in_amount_{{ i }}" placeholder="Recipe amount"
-                                    onchange="amountChange(this)" disabled="true"/></td>
-                                <td>
-                                    <div class="select is-small">
-                                        <select id="in_unit_select_{{ i }}" onchange="unitChange(this)" disabled="true">
-                                            <option>Recipe unit</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td><span id="out_amount_{{ i }}"> </span></td>
-                                <td>
-                                    <div class="select is-small">
-                                        <select id="out_unit_select_{{ i }}" onchange="unitChange(this)"  disabled="true">
-                                            <option>Final unit</option>
-                                        </select>
-                                    </div>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+            <input class="input" id="multiply" type="number" min="0" placeholder="" />
+          </div>
+          <div class="column is-2">
+            <div class="label" for="multiply">
+              Divide by
             </div>
-        </section>
-
-    </body>
+            <input class="input" id="divide" type="number" min="0" placeholder="" />
+          </div>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-8 is-offset-2 is-centered">
+          <table class="table is-responsive" style="width: 100%;">
+            <thead>
+              <tr>
+                <th style="width: 40%;">Ingredient</th>
+                <th>Recipe amount</th>
+                <th>Recipe unit</th>
+                <th>Final amount</th>
+                <th>Final unit</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in (1..20) %}
+              <tr>
+                <td>
+                  <select name="example" id="ingredient_select_{{ i }}">
+                    <option></option>
+                  </select>
+                </td>
+                <td>
+                  <input class="input is-small" type="text" id="in_amount_{{ i }}" placeholder="Recipe amount" onchange="amountChange(this)" disabled="true" />
+                </td>
+                <td>
+                  <div class="select is-small">
+                    <select id="in_unit_select_{{ i }}" onchange="unitChange(this)" disabled="true">
+                      <option>Recipe unit</option>
+                    </select>
+                  </div>
+                </td>
+                <td><span id="out_amount_{{ i }}"> </span></td>
+                <td>
+                  <div class="select is-small">
+                    <select id="out_unit_select_{{ i }}" onchange="unitChange(this)" disabled="true">
+                      <option>Final unit</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </body>
 </html>
