@@ -96,7 +96,8 @@ def convert_rows(reader):
     rows = []
     for row in reader:
         rows.append(convert_row(row))
-    return sorted(rows, key=lambda x: x["ingredient"])
+    return {y["ingredient"]: y
+      for y in sorted(rows, key=lambda x: x["ingredient"])}
 
 
 def main():
