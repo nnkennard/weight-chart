@@ -50,13 +50,13 @@
             <div class="label" for="multiply">
               Multiply by
             </div>
-            <input class="input" id="multiply" type="number" min="0" placeholder="" />
+            <input class="input" id="multiply" type="number" min="0" value="1" onchange="scaleChange()" />
           </div>
           <div class="column is-2">
             <div class="label" for="multiply">
               Divide by
             </div>
-            <input class="input" id="divide" type="number" min="0" placeholder="" />
+            <input class="input" id="divide" type="number" min="1" value="1" onchange="scaleChange()" />
           </div>
         </div>
       </div>
@@ -81,20 +81,22 @@
                   </select>
                 </td>
                 <td>
-                  <input class="input is-small" type="text" id="in_amount_{{ i }}" placeholder="Recipe amount" onchange="amountChange(this)" disabled="true" />
+                  <input class="input is-small" type="number" step="any" id="in_amount_{{ i }}" placeholder="Recipe amount" onchange="amountOrUnitChange(this)" disabled="true" />
                 </td>
                 <td>
                   <div class="select is-small">
-                    <select id="in_unit_select_{{ i }}" onchange="unitChange(this)" disabled="true">
-                      <option>Recipe unit</option>
+                    <select id="in_unit_select_{{ i }}" onchange="amountOrUnitChange(this)" disabled="true">
+                      <option>gm</option>
+                      <option>oz</option>
                     </select>
                   </div>
                 </td>
                 <td><span id="out_amount_{{ i }}"> </span></td>
                 <td>
                   <div class="select is-small">
-                    <select id="out_unit_select_{{ i }}" onchange="unitChange(this)" disabled="true">
-                      <option>Final unit</option>
+                    <select id="out_unit_select_{{ i }}" onchange="amountOrUnitChange(this)" disabled="true">
+                      <option>gm</option>
+                      <option>oz</option>
                     </select>
                   </div>
                 </td>
